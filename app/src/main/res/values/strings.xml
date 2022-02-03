@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">GithubUsers</string>
     <string name="users">Users</string>
+    <string name="repos">Repos:</string>
+    <string name="gists">Gists:</string>
+    <string name="followers">Followers:</string>
 </resources>
