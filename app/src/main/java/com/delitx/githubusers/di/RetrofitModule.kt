@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
-    const val API_LINK = "api.github.com/"
+    const val API_LINK = "https://api.github.com/"
 
     @Singleton
     @Provides

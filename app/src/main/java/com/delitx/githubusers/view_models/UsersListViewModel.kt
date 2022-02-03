@@ -9,9 +9,7 @@ import com.delitx.githubusers.use_cases.LoadMoreUsersUseCase
 import com.delitx.githubusers.use_cases.RefreshUsersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,11 +23,11 @@ class UsersListViewModel @Inject constructor(
     private val _internetError: MutableSharedFlow<InternetError> = MutableSharedFlow()
     val internetError: SharedFlow<InternetError> = _internetError.asSharedFlow()
 
-    private val _isUsersRefreshing: MutableSharedFlow<Boolean> = MutableSharedFlow()
-    val isUsersRefreshing: SharedFlow<Boolean> = _isUsersRefreshing.asSharedFlow()
+    private val _isUsersRefreshing: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isUsersRefreshing: StateFlow<Boolean> = _isUsersRefreshing.asStateFlow()
 
-    private val _isMoreUsersLoading: MutableSharedFlow<Boolean> = MutableSharedFlow()
-    val isMoreUsersLoading: SharedFlow<Boolean> = _isMoreUsersLoading.asSharedFlow()
+    private val _isMoreUsersLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isMoreUsersLoading: StateFlow<Boolean> = _isMoreUsersLoading.asStateFlow()
 
     private var _loadMoreUsersJob: Job? = null
         set(value) {
@@ -57,7 +55,7 @@ class UsersListViewModel @Inject constructor(
     fun maybeRefreshUsers() {
         if (_refreshUsersJob == null) {
             _refreshUsersJob = viewModelScope.launch {
-                val result = _loadMoreUsersUseCase()
+                val result = _refreshUsersUseCase()
                 when (result) {
                     is DataState.Data -> {
                         _refreshUsersJob = null

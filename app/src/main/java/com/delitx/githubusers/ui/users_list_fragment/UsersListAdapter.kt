@@ -12,7 +12,7 @@ import com.delitx.githubusers.R
 import com.delitx.githubusers.domain.models.BriefUserInfo
 import de.hdodenhof.circleimageview.CircleImageView
 
-class UsersListAdapter(val interactor: Interactor) :
+class UsersListAdapter(private val interactor: Interactor) :
     ListAdapter<BriefUserInfo, UsersListAdapter.UsersListViewHolder>(
         object : DiffUtil.ItemCallback<BriefUserInfo>() {
             override fun areItemsTheSame(oldItem: BriefUserInfo, newItem: BriefUserInfo) =
@@ -22,6 +22,10 @@ class UsersListAdapter(val interactor: Interactor) :
                 oldItem.iconUrl == newItem.iconUrl &&
                     oldItem.name == newItem.name
         }) {
+    companion object {
+        private const val USERS_TILL_UPDATE = 5
+    }
+
     class UsersListViewHolder(private val v: View, val interactor: Interactor) :
         RecyclerView.ViewHolder(v) {
         private val userIcon = v.findViewById<CircleImageView>(R.id.user_icon)
@@ -40,15 +44,19 @@ class UsersListAdapter(val interactor: Interactor) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.user_card, parent)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.user_card, parent, false)
         return UsersListViewHolder(view, interactor)
     }
 
     override fun onBindViewHolder(holder: UsersListViewHolder, position: Int) {
         holder.bind(getItem(position))
+        if (currentList.size - position <= USERS_TILL_UPDATE) {
+            interactor.maybeLoadMoreUsers()
+        }
     }
 
-    fun interface Interactor {
+    interface Interactor {
         fun onUserClick(user: BriefUserInfo)
+        fun maybeLoadMoreUsers()
     }
 }

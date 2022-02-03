@@ -4,4 +4,5 @@
     <string name="repos">Repos:</string>
     <string name="gists">Gists:</string>
     <string name="followers">Followers:</string>
+    <string name="data_not_loaded">Data not loaded</string>
 </resources>
