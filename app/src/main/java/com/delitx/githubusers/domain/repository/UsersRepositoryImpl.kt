@@ -12,7 +12,7 @@ class UsersRepositoryImpl(
     private val _usersRequests: UsersRequests
 ) : UsersRepository {
     private val _users: MutableStateFlow<List<BriefUserInfo>> = MutableStateFlow(listOf())
-    val users: StateFlow<List<BriefUserInfo>> = _users.asStateFlow()
+    override val users: StateFlow<List<BriefUserInfo>> = _users.asStateFlow()
 
     override suspend fun refreshUsers(): DataState<Unit> {
         return try {
