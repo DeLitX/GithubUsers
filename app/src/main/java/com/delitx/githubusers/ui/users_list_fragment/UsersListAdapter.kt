@@ -19,7 +19,7 @@ class UsersListAdapter(val interactor: Interactor) :
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: BriefUserInfo, newItem: BriefUserInfo) =
-                oldItem.imageUrl == newItem.imageUrl &&
+                oldItem.iconUrl == newItem.iconUrl &&
                     oldItem.name == newItem.name
         }) {
     class UsersListViewHolder(private val v: View, val interactor: Interactor) :
@@ -33,7 +33,7 @@ class UsersListAdapter(val interactor: Interactor) :
         }
 
         fun bind(user: BriefUserInfo) {
-            Glide.with(v.context).load(user.imageUrl).into(userIcon)
+            Glide.with(v.context).load(user.iconUrl).into(userIcon)
             userName.text = user.name
             onClick = { interactor.onUserClick(user) }
         }
