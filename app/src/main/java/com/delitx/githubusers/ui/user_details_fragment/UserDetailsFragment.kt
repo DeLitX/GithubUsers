@@ -1,16 +1,26 @@
 package com.delitx.githubusers.ui.user_details_fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.delitx.githubusers.R
+import com.delitx.githubusers.common.DataState
+import com.delitx.githubusers.ui.utils.collectInLifecycleScope
+import com.delitx.githubusers.view_models.UserDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class UserDetailsFragment : Fragment() {
@@ -24,17 +34,56 @@ class UserDetailsFragment : Fragment() {
     private lateinit var userGistsAmount: TextView
     private lateinit var userFollowersAmount: TextView
 
+    private val viewModel: UserDetailsViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        arguments?.let {
+            val args = UserDetailsFragmentArgs.fromBundle(it)
+            viewModel.loadUser(args.userLogin)
+        }
+
         return inflater.inflate(R.layout.fragment_user_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindViews(view)
+        observeViewModelData()
+    }
+
+    private fun observeViewModelData() {
+        viewModel.user.collectInLifecycleScope(viewLifecycleOwner) {
+            withContext(Dispatchers.Main) {
+                when (it) {
+                    is DataState.Data -> {
+                        val user = it.value
+                        toolbarUserName.text = user.name
+                        Glide.with(requireView()).load(user.iconUrl).into(userIcon)
+                        userName.text = user.name
+                        userUrl.text = user.url
+                        userUrl.setOnClickListener {
+                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(user.url)))
+                        }
+                        userReposAmount.text = user.publicRepositories.toString()
+                        userGistsAmount.text = user.publicGists.toString()
+                        userFollowersAmount.text = user.followers.toString()
+                    }
+                    is DataState.Failure -> {
+                        Toast.makeText(
+                            context,
+                            getText(R.string.data_not_loaded),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    is DataState.Undefined -> {
+                    }
+                }
+            }
+        }
     }
 
     private fun bindViews(view: View) {

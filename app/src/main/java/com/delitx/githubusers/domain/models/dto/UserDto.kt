@@ -9,7 +9,7 @@ data class UserDto(
     val name: String,
     @SerializedName("avatar_url")
     val iconUrl: String,
-    @SerializedName("url")
+    @SerializedName("html_url")
     val url: String,
     @SerializedName("public_repos")
     val publicRepositories: Int,
