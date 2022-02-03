@@ -19,7 +19,9 @@ fun <T> Flow<T>.collectInLifecycleScope(
 ) {
     owner.lifecycleScope.launch {
         owner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            collect(collectionLambda)
+            launch {
+                collect(collectionLambda)
+            }
         }
     }
 }

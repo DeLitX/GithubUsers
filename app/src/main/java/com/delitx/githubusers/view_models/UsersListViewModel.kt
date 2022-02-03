@@ -56,6 +56,12 @@ class UsersListViewModel @Inject constructor(
         }
     }
 
+    fun refreshUsersIfNone() {
+        if (users.value.isEmpty()) {
+            maybeRefreshUsers()
+        }
+    }
+
     fun maybeRefreshUsers() {
         if (_refreshUsersJob == null) {
             _refreshUsersJob = viewModelScope.launch {

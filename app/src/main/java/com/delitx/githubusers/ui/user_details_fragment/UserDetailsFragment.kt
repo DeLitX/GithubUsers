@@ -7,22 +7,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.delitx.githubusers.R
-import com.delitx.githubusers.ui.utils.forceFindViewById
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 
 @AndroidEntryPoint
 class UserDetailsFragment : Fragment() {
 
-    val toolbarBackButton: ImageView by lazy { forceFindViewById(R.id.user_details_back) }
-    val toolbarUserName: TextView by lazy { forceFindViewById(R.id.user_details_app_bar_name) }
-    val userIcon: CircleImageView by lazy { forceFindViewById(R.id.user_details_icon) }
-    val userName: TextView by lazy { forceFindViewById(R.id.user_details_name) }
-    val userUrl: TextView by lazy { forceFindViewById(R.id.user_details_url) }
-    val userReposAmount: TextView by lazy { forceFindViewById(R.id.user_details_repos_amount) }
-    val userGistsAmount: TextView by lazy { forceFindViewById(R.id.user_details_gists_amount) }
-    val userFollowersAmount: TextView by lazy { forceFindViewById(R.id.user_details_followers_amount) }
+    private lateinit var toolbarBackButton: ImageView
+    private lateinit var toolbarUserName: TextView
+    private lateinit var userIcon: CircleImageView
+    private lateinit var userName: TextView
+    private lateinit var userUrl: TextView
+    private lateinit var userReposAmount: TextView
+    private lateinit var userGistsAmount: TextView
+    private lateinit var userFollowersAmount: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,10 +34,22 @@ class UserDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindViews()
+        bindViews(view)
     }
 
-    private fun bindViews() {
-        TODO("Not yet implemented")
+    private fun bindViews(view: View) {
+        with(view) {
+            toolbarBackButton = findViewById(R.id.user_details_back)
+            toolbarUserName = findViewById(R.id.user_details_app_bar_name)
+            userIcon = findViewById(R.id.user_details_icon)
+            userName = findViewById(R.id.user_details_name)
+            userUrl = findViewById(R.id.user_details_url)
+            userReposAmount = findViewById(R.id.user_details_repos_amount)
+            userGistsAmount = findViewById(R.id.user_details_gists_amount)
+            userFollowersAmount = findViewById(R.id.user_details_followers_amount)
+        }
+        toolbarBackButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 }
