@@ -19,22 +19,23 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/user_details_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:src="@drawable/ic_arrow_back" />
 
         <TextView
+            android:id="@+id/user_details_app_bar_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/users"
             android:textColor="@color/white" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/user_icon"
+        android:id="@+id/user_details_icon"
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,20 +44,20 @@
         android:layout_margin="50dp"/>
 
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/user_details_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_icon" />
+        app:layout_constraintTop_toBottomOf="@id/user_details_icon" />
 
     <TextView
-        android:id="@+id/user_url"
+        android:id="@+id/user_details_url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_name"
+        app:layout_constraintTop_toBottomOf="@id/user_details_name"
         android:layout_marginTop="15dp"/>
 
     <LinearLayout
@@ -64,7 +65,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="20dp"
-        app:layout_constraintTop_toBottomOf="@id/user_url">
+        app:layout_constraintTop_toBottomOf="@id/user_details_url">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -78,7 +79,7 @@
                 android:text="@string/repos" />
 
             <TextView
-                android:id="@+id/user_repos_amount"
+                android:id="@+id/user_details_repos_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -95,7 +96,7 @@
                 android:text="@string/gists" />
 
             <TextView
-                android:id="@+id/user_gists_amount"
+                android:id="@+id/user_details_gists_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -112,7 +113,7 @@
                 android:text="@string/followers" />
 
             <TextView
-                android:id="@+id/user_followers_amount"
+                android:id="@+id/user_details_followers_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
