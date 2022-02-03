@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.delitx.githubusers.R
 import com.delitx.githubusers.ui.utils.forceFindViewById
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UsersListFragment : Fragment() {
     val adapter = UsersListAdapter {}
 

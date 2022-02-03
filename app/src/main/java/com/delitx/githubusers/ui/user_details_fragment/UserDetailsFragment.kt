@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.delitx.githubusers.R
 import com.delitx.githubusers.ui.utils.forceFindViewById
+import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 
+@AndroidEntryPoint
 class UserDetailsFragment : Fragment() {
 
     val toolbarBackButton: ImageView by lazy { forceFindViewById(R.id.user_details_back) }
