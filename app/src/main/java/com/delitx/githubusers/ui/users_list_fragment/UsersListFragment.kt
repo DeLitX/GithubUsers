@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.delitx.githubusers.R
+import com.delitx.githubusers.ui.utils.forceFindViewById
 
 class UsersListFragment : Fragment() {
     val adapter = UsersListAdapter {}
 
-    val swipeRefreshLayout by lazy { requireView().findViewById<SwipeRefreshLayout>(R.id.users_list_refresh_layout) }
-    val recycler by lazy { requireView().findViewById<RecyclerView>(R.id.users_list_recycler) }
-    val appBar by lazy { requireView().findViewById<Toolbar>(R.id.users_list_app_bar) }
+    val swipeRefreshLayout: SwipeRefreshLayout by lazy { forceFindViewById(R.id.users_list_refresh_layout) }
+    val recycler: RecyclerView by lazy { forceFindViewById(R.id.users_list_recycler) }
+    val toolbar: Toolbar by lazy { forceFindViewById(R.id.users_list_app_bar) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
