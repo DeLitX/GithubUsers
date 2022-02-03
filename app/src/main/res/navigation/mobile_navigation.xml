@@ -10,10 +10,8 @@
         android:name="com.delitx.githubusers.ui.user_details_fragment.UserDetailsFragment"
         android:label="fragment_user_details"
         tools:layout="@layout/fragment_user_details" >
-        <argument
-            android:name="user_Login"
-            app:argType="string"
-            android:defaultValue='""' />
+        <argument android:name="icon_url" />
+        <argument android:name="user_login" />
     </fragment>
     <fragment
         android:id="@+id/usersListFragment"
@@ -23,9 +21,6 @@
         <action
             android:id="@+id/action_usersListFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" >
-            <argument
-                android:name="user_Login"
-                android:defaultValue='""' />
         </action>
     </fragment>
 </navigation>

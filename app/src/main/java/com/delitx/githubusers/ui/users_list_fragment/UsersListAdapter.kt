@@ -39,7 +39,10 @@ class UsersListAdapter(private val interactor: Interactor) :
         fun bind(user: BriefUserInfo) {
             Glide.with(v.context).load(user.iconUrl).into(userIcon)
             userName.text = user.name
-            onClick = { interactor.onUserClick(user) }
+            userIcon.transitionName = user.name
+            onClick = {
+                interactor.onUserClick(user, userIcon)
+            }
         }
     }
 
@@ -56,7 +59,7 @@ class UsersListAdapter(private val interactor: Interactor) :
     }
 
     interface Interactor {
-        fun onUserClick(user: BriefUserInfo)
+        fun onUserClick(user: BriefUserInfo, img: CircleImageView)
         fun maybeLoadMoreUsers()
     }
 }

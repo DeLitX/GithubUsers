@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import com.delitx.githubusers.domain.models.BriefUserInfo
 import com.delitx.githubusers.ui.utils.collectInLifecycleScope
 import com.delitx.githubusers.view_models.UsersListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -28,11 +30,13 @@ class UsersListFragment : Fragment() {
 
     private val adapter = UsersListAdapter(
         object : UsersListAdapter.Interactor {
-            override fun onUserClick(user: BriefUserInfo) {
+            override fun onUserClick(user: BriefUserInfo, img: CircleImageView) {
                 val action =
-                    UsersListFragmentDirections.actionUsersListFragmentToUserDetailsFragment()
-                action.userLogin = user.name
-                findNavController().navigate(action)
+                    UsersListFragmentDirections.actionUsersListFragmentToUserDetailsFragment(
+                        user.iconUrl,
+                        user.name,
+                    )
+                findNavController().navigate(action, FragmentNavigatorExtras(img to user.name))
             }
 
             override fun maybeLoadMoreUsers() {

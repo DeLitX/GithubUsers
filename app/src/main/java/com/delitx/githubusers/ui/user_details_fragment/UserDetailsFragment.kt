@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionInflater
 import com.bumptech.glide.Glide
 import com.delitx.githubusers.R
 import com.delitx.githubusers.common.DataState
@@ -36,22 +37,33 @@ class UserDetailsFragment : Fragment() {
 
     private val viewModel: UserDetailsViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val animation = context?.let {
+            TransitionInflater.from(it).inflateTransition(android.R.transition.move)
+        }
+        sharedElementEnterTransition = animation
+        sharedElementReturnTransition = animation
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        arguments?.let {
-            val args = UserDetailsFragmentArgs.fromBundle(it)
-            viewModel.loadUser(args.userLogin)
-        }
-
-        return inflater.inflate(R.layout.fragment_user_details, container, false)
+        val view = inflater.inflate(R.layout.fragment_user_details, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindViews(view)
+        arguments?.let {
+            val args = UserDetailsFragmentArgs.fromBundle(it)
+            viewModel.loadUser(args.userLogin)
+            userIcon.transitionName = args.userLogin
+            Glide.with(view).load(args.iconUrl).into(userIcon)
+        }
         observeViewModelData()
     }
 
