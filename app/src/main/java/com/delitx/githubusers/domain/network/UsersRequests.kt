@@ -6,8 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-const val API_LINK = "api.github.com/"
-
 interface UsersRequests {
     @GET("users")
     suspend fun getUsers(@Query("since") lastUserId: Int = 0): List<BriefUserInfoDto>
