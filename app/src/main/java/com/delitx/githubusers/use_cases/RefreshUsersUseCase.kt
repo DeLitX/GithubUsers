@@ -6,5 +6,5 @@ import com.delitx.githubusers.domain.repository.UsersRepository
 class RefreshUsersUseCase(
     private val _repository: UsersRepository
 ) {
-    suspend fun invoke(): DataState<Unit> = _repository.refreshUsers()
+    suspend operator fun invoke(): DataState<Unit> = _repository.refreshUsers()
 }

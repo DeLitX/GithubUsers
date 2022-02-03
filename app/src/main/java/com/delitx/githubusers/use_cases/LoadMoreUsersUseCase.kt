@@ -6,5 +6,5 @@ import com.delitx.githubusers.domain.repository.UsersRepository
 class LoadMoreUsersUseCase(
     private val _repository: UsersRepository
 ) {
-    suspend fun invoke(): DataState<Unit> = _repository.loadMoreUsers()
+    suspend operator fun invoke(): DataState<Unit> = _repository.loadMoreUsers()
 }

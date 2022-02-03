@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.StateFlow
 class GetUsersFlowUseCase(
     private val _repository: UsersRepository
 ) {
-    suspend fun invoke(): StateFlow<List<BriefUserInfo>> = _repository.users
+    suspend operator fun invoke(): StateFlow<List<BriefUserInfo>> = _repository.users
 }
