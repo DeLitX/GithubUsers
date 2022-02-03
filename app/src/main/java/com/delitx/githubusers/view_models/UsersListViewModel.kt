@@ -46,7 +46,11 @@ class UsersListViewModel @Inject constructor(
                 val result = _loadMoreUsersUseCase()
                 when (result) {
                     is DataState.Data -> _loadMoreUsersJob = null
-                    is DataState.Failure -> _internetError.emit(InternetError.DataNotLoaded)
+                    is DataState.Failure -> {
+                        _loadMoreUsersJob = null
+                        _internetError.emit(InternetError.DataNotLoaded)
+                    }
+                    is DataState.Undefined -> {}
                 }
             }
         }
@@ -62,7 +66,11 @@ class UsersListViewModel @Inject constructor(
                         _loadMoreUsersJob?.cancel()
                         _loadMoreUsersJob = null
                     }
-                    is DataState.Failure -> _internetError.emit(InternetError.DataNotLoaded)
+                    is DataState.Failure -> {
+                        _refreshUsersJob = null
+                        _internetError.emit(InternetError.DataNotLoaded)
+                    }
+                    is DataState.Undefined -> {}
                 }
             }
         }
