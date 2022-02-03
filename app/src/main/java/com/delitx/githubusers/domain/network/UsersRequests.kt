@@ -13,5 +13,5 @@ interface UsersRequests {
     suspend fun getUsers(@Query("since") lastUserId: Int = 0): List<BriefUserInfoDto>
 
     @GET("users/{user}")
-    suspend fun getUser(@Path("user") userLogin: String): List<UserDto>
+    suspend fun getUser(@Path("user") userLogin: String): UserDto
 }
