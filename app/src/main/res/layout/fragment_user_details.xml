@@ -30,7 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -49,7 +50,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_details_icon" />
+        app:layout_constraintTop_toBottomOf="@id/user_details_icon"
+        android:textSize="40sp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/user_details_url"
@@ -58,7 +61,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_details_name"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:textColor="#808080"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,12 +80,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/repos" />
+                android:text="@string/repos"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/user_details_repos_amount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -93,12 +99,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/gists" />
+                android:text="@string/gists"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/user_details_gists_amount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -110,12 +118,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/followers" />
+                android:text="@string/followers"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/user_details_followers_amount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 
