@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/usersListFragment">
+
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.delitx.githubusers.ui.user_details_fragment.UserDetailsFragment"
+        android:label="fragment_user_details"
+        tools:layout="@layout/fragment_user_details" >
+        <argument
+            android:name="user_Login"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+    <fragment
+        android:id="@+id/usersListFragment"
+        android:name="com.delitx.githubusers.ui.users_list_fragment.UsersListFragment"
+        android:label="fragment_users_list"
+        tools:layout="@layout/fragment_users_list" >
+        <action
+            android:id="@+id/action_usersListFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" >
+            <argument
+                android:name="user_Login"
+                android:defaultValue='""' />
+        </action>
+    </fragment>
+</navigation>
